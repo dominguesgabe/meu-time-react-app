@@ -1,4 +1,4 @@
-# meu-time-react-app ⚽
+# [meu-time-react-app](https://meu-time-react.netlify.app/) ⚽
 
  ## Veja dados de Futebol do mundo todo!
 
@@ -31,3 +31,5 @@ Caso tenha problemas com permissão na pasta do projeto (fora do container), rod
  
 #### Processo de desenvolvimento
  1. **Definir ambiente**: Criei o repositório e tive que buscar alguns tutoriais na internet de como fazer um ambiente docker visto que não tenho muita prática, e então aplicar Vite para a criação da estrutura. Depois disso instalei algumas dependências que quero usar, como o Jest, depois disso comecei a configuração 🤡.
+ 2. **Ajustes finais no ambiente**: Uma coisa que deixei passar no setup foram as rotas e gerenciamento de estado, por isso adicionei as libs *react-router-dom* e criei páginas necessárias, eu também adicionaria alguma lib de estilos, mas acabei fazendo o css na mão até o momento.
+ 3. **Iniciando o desenvolvimento**: Eu já fiz a primeira requisição, que será a base da autenticação, e isso foi tranquilo, porém o typescript parece ser a tecnologia dessa stack que estou tendo mais dificuldade, não consegui manter o strict mode ligado e ainda não fiz nenhum teste unitário. 
