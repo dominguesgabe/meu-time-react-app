@@ -1,3 +1,3 @@
-export default function AppPage() {
+export const AppPage: React.FC = () => {
     return <div>Dashboard</div>
 }
