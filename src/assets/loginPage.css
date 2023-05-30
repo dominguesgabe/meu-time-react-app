@@ -14,6 +14,7 @@
     border: 1px solid var(--mainColor);
     transition-duration: .2s;
     padding: 6px;
+    display: block;
 }
 
 .sign-in-button {
@@ -35,6 +36,12 @@
 
 .sign-in-button:disabled {
     filter: opacity(.8);
+}
+
+.invalid-token {
+    font-size: .8em;
+    color: #f35d5d;
+    display: inline-block;
 }
 
 @media (min-width: 1001px) {

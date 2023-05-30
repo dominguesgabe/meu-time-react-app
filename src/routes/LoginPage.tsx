@@ -1,51 +1,44 @@
 import { FormEvent, useState } from 'react'
+import { redirect } from "react-router-dom"
 import Container from '../components/Container'
-import '../assets/loginPage.css'
 import { AuthProps } from './AppRouter'
+import { HttpProvider, HttpResponse } from '../utils/HttpProvider'
+import { Endpoint } from '../utils/Enum'
+import { ValidateLogin } from '../utils/ValidateLogin'
+import '../assets/loginPage.css'
 
 
-type Props = {
-    auth: AuthProps;
-    setAuth: React.Dispatch<React.SetStateAction<AuthProps>>;
-  };
+export type LoginPageProps = {
+    auth: AuthProps
+    setAuth: React.Dispatch<React.SetStateAction<AuthProps>>
+}
 
 
-//   export const AuthContextProvider = ({ children }) => {
-//     const [currentUser, setCurrentUser] = useState(
-//       JSON.parse(localStorage.getItem("users")) || null
-//     )
-//   }
-
-export const LoginPage: any = ({ auth, setAuth }: Props) => {
-    
+export const LoginPage = ({ auth, setAuth }: LoginPageProps): JSX.Element => {
     
     const [token, setToken] = useState<string>('')
+    const [tokenError, setTokenError] = useState(false)
 
-    const submitHandler = (e: FormEvent) => {
+    const submitHandler = async (e: FormEvent) => {
         e.preventDefault()
-        
-        var headers = new Headers()
-        headers.append("x-rapidapi-host", "v3.football.api-sports.io")
-        headers.append("x-rapidapi-key", token)
 
-        const requestOptions: RequestInit = {
-            method: 'GET',
-            headers: headers,
-            redirect: 'follow'
+        const loginObject: HttpResponse = await HttpProvider(token, Endpoint.Credential)
+
+        if (loginObject.response.account) {
+            setAuth({ logged: true, token: token })
+            return redirect("/app")
+        } else {
+            setTokenError(true)
         }
-
-        fetch("https://v3.football.api-sports.io/", requestOptions)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.log('error', error))
     }
 
-    const formHandler = (e: any) => {
+    const formHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setToken(e.target.value)
     }
 
     return (
         <Container>
+            <p>b8c288d6b0db7432558c1fb493851c48</p>
             <h1 className="login-title">Olá, seja bem vindo ao Meu Time ⚽</h1>
         
             <form className="form-login" onSubmit={submitHandler}>
@@ -53,6 +46,7 @@ export const LoginPage: any = ({ auth, setAuth }: Props) => {
                     Insira sua chave de autenticação
                     <input value={token} onChange={formHandler} className="form-input" type="text" />
                 </label>
+                { tokenError && <span className="invalid-token">Token inválido.</span> }
                 <button type="submit" className="sign-in-button" disabled={!token}>Entrar</button>
                 <a href="https://dashboard.api-football.com/register" className="sign-up">Registre-se</a>
             </form>

@@ -1,16 +1,15 @@
+import { redirect } from "react-router-dom";
 
+export const RequireAuth = (Component: JSX.Element) => {
 
-// type RequireAuthProps = {
-//     children: JSX.Element
-// }
+    const AuthRoute = () => {
 
-
-export const RequireAuth: any = ({ children }: any) => {
-    
-
-  return (
-    <>
-        { children }
-    </>
-  )
-}
+      if (false) {
+        return <Component />;
+      } else {
+        return redirect("/vaca")
+      }
+    };
+  
+    return AuthRoute;
+  };
