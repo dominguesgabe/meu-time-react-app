@@ -1,12 +1,13 @@
 import '../assets/errorPage.css'
 import Container from '../components/Container'
 import { Link } from 'react-router-dom';
+import { Routes } from '../utils/Enum';
 
 type ErrorPageProps = {
     errorMessage: string
 }
 
-export const ErrorPage: React.FC<ErrorPageProps> = ({ errorMessage }: ErrorPageProps) => {
+export const ErrorPage: React.FC<ErrorPageProps> = ({ errorMessage }: ErrorPageProps): JSX.Element => {
 
     return (
         <Container>
@@ -14,7 +15,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({ errorMessage }: ErrorPageP
             <p>
                 { errorMessage }
             </p>
-            <Link to={'/'}>Voltar para a home</Link>
+            <Link to={Routes.Home}>Voltar para a home</Link>
         </Container>
-    );
+    )
 }

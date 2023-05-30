@@ -1,15 +1,26 @@
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { Routes } from "../utils/Enum"
+import { AuthProps } from "../routes/AppRouter"
+import { useEffect } from "react"
 
-export const RequireAuth = (Component: JSX.Element) => {
+type RequireAuthProps = {
+    auth: AuthProps
+    children: JSX.Element
+}
 
-    const AuthRoute = () => {
+export const RequireAuth = (props: RequireAuthProps) => {
+    const navigate = useNavigate()
 
-      if (false) {
-        return <Component />;
-      } else {
-        return redirect("/vaca")
-      }
-    };
-  
-    return AuthRoute;
-  };
+    const localStorageToken = window.localStorage.getItem("auth")
+
+    console.log(localStorageToken);
+    
+
+    useEffect(() => {
+        if (!props.auth.logged) {
+            return navigate(Routes.Home)
+        }
+    }, [])
+
+    return props.children
+}

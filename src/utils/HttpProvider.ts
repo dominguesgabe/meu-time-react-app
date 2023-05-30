@@ -8,7 +8,7 @@ export type successResponse = {
 
 export type HttpResponse = {
     errors: {} | []
-    response: successResponse | []
+    response: successResponse
 }
 
 export const HttpProvider =  async (token: string, endpoint: string): Promise<HttpResponse> => {

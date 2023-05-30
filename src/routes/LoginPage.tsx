@@ -1,10 +1,9 @@
 import { FormEvent, useState } from 'react'
-import { redirect } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Container from '../components/Container'
 import { AuthProps } from './AppRouter'
 import { HttpProvider, HttpResponse } from '../utils/HttpProvider'
 import { Endpoint } from '../utils/Enum'
-import { ValidateLogin } from '../utils/ValidateLogin'
 import '../assets/loginPage.css'
 
 
@@ -19,14 +18,18 @@ export const LoginPage = ({ auth, setAuth }: LoginPageProps): JSX.Element => {
     const [token, setToken] = useState<string>('')
     const [tokenError, setTokenError] = useState(false)
 
+    const navigate = useNavigate()
+
     const submitHandler = async (e: FormEvent) => {
         e.preventDefault()
 
         const loginObject: HttpResponse = await HttpProvider(token, Endpoint.Credential)
 
         if (loginObject.response.account) {
+            console.log('entrou');
+            
             setAuth({ logged: true, token: token })
-            return redirect("/app")
+            return navigate("/app")
         } else {
             setTokenError(true)
         }

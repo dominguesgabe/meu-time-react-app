@@ -1,8 +1,9 @@
-import { AuthProps } from "./AppRouter"
-import { RequireAuth } from "../components/RequireAuth"
+import Container from "../components/Container"
 
-const AppPage: any = (auth: AuthProps): JSX.Element => {
-    return <div>Dashboard</div>
+export const AppPage = (): JSX.Element => {
+    return (
+        <Container>
+            <div>Dashboard</div>
+        </Container>
+    )
 }
-
-export default RequireAuth(AppPage)

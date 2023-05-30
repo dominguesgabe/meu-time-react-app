@@ -34,7 +34,7 @@ div, span {
 }
 @media (min-width: 1001px) {
     .container {
-        max-width: 55vw;
+        max-width: 65vw;
     }
 }
 @media (max-width: 1000px) {
