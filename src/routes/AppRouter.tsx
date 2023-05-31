@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { BrowserRouter, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { LoginPage } from './LoginPage'
 import { ErrorPage } from './ErrorPage'
 import { AppPage } from './AppPage'
@@ -16,13 +16,15 @@ export const AppRouter = () => {
     const [auth, setAuth] = useState<AuthProps>({logged: null, token: ""})
 
     useEffect(() => {
-        window.localStorage.setItem("auth", JSON.stringify(auth))
-    }, [auth])
+        if (auth.logged) {
+            window.localStorage.setItem("auth", JSON.stringify(auth))
+        }
+    }, [auth.logged])
 
     const router = createBrowserRouter([
         {
             path: Routes.Home,
-            element: <LoginPage auth={auth} setAuth={setAuth} />,
+            element: <LoginPage setAuth={setAuth} />,
             index: true
         },
         {

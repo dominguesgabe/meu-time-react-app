@@ -11,16 +11,22 @@ type RequireAuthProps = {
 export const RequireAuth = (props: RequireAuthProps) => {
     const navigate = useNavigate()
 
-    const localStorageToken = window.localStorage.getItem("auth")
+    try {
+        const token: AuthProps = JSON.parse(window.localStorage.getItem("auth") ?? "")
 
-    console.log(localStorageToken);
-    
-
-    useEffect(() => {
-        if (!props.auth.logged) {
-            return navigate(Routes.Home)
+        if (token.logged) {
+            return props.children
         }
-    }, [])
 
-    return props.children
+    } catch {
+        
+        useEffect(() => {
+            if (!props.auth.logged) {
+                return navigate(Routes.Home)
+            }
+        }, [])
+
+        return props.children
+        
+    }
 }

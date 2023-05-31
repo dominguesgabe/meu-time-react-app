@@ -8,12 +8,11 @@ import '../assets/loginPage.css'
 
 
 export type LoginPageProps = {
-    auth: AuthProps
     setAuth: React.Dispatch<React.SetStateAction<AuthProps>>
 }
 
 
-export const LoginPage = ({ auth, setAuth }: LoginPageProps): JSX.Element => {
+export const LoginPage = ({ setAuth }: LoginPageProps): JSX.Element => {
     
     const [token, setToken] = useState<string>('')
     const [tokenError, setTokenError] = useState(false)
@@ -26,10 +25,10 @@ export const LoginPage = ({ auth, setAuth }: LoginPageProps): JSX.Element => {
         const loginObject: HttpResponse = await HttpProvider(token, Endpoint.Credential)
 
         if (loginObject.response.account) {
-            console.log('entrou');
             
             setAuth({ logged: true, token: token })
             return navigate("/app")
+
         } else {
             setTokenError(true)
         }
