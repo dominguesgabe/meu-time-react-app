@@ -8,16 +8,19 @@
 }
 
 .form-input {
+    width: 100%;
+    max-width: 240px;
     border-radius: 4px;
     border: 1px solid var(--mainColor);
     transition-duration: .2s;
     padding: 6px;
+    display: block;
 }
 
 .sign-in-button {
     display: block;
     width: 180px;
-    margin: 10px auto 0;
+    margin: 10px auto;
     background-color: var(--mainColor);
     color: #fff;
     border: 0;
@@ -27,16 +30,22 @@
     transition-duration: .2s;
 }
 
-.sign-in-button:hover {
+.sign-in-button:not(:disabled):hover {
     scale: 1.02;
 }
 
-.sign-up {
-    margin-top: 10px;
+.sign-in-button:disabled {
+    filter: opacity(.8);
+}
+
+.invalid-token {
+    font-size: .8em;
+    color: #f35d5d;
+    display: inline-block;
 }
 
 @media (min-width: 1001px) {
     .login-title {
-        max-width: 45%;
+        max-width: 40%;
     }
 }
